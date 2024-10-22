@@ -1,3 +1,39 @@
+class Car:
+    def __init__(self, id, fio, model):
+        self.id = id
+        self.fio = fio
+        self.model = model
+
+
+def read_fro_file(filename):
+    cars = []
+    with open(filename,'r',encoding='utf-8') as file:
+        for line in file:
+            id, fio, model = line.strip().split()
+            if model == 'BMW':
+                cars.append(Car(id, fio, model))
+    return cars
+
+
+def sort(cars):
+    return  sorted(cars, key= lambda Car: Car.model)
+
+def write_to_file(cars,filename):
+    with open(filename, 'w', encoding='utf-8') as file:
+        for Car in cars:
+            file.write(f"{Car.id} {Car.fio} {Car.model}\n")
+
+
+cars = read_fro_file('in.txt')
+sorted_file = sort(cars)
+write_to_file(sorted_file, 'out.txt')
+
+
+
+
+
+
+
 """Общее
 1. Есть текстовый файл с данными (in.txt)
 2. Прочесть в список экземпляров класса
